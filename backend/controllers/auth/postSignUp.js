@@ -7,6 +7,8 @@ const postSignUp = asyncHandler(async (req, res) => {
   try {
     const { username, password, email } = req.body;
 
+    console.log(req.body);
+
     // Check if username or email is empty
     if (!username || !password || !email) {
       res.status(400);
@@ -14,13 +16,13 @@ const postSignUp = asyncHandler(async (req, res) => {
     }
 
     // Check if user already exists
-    const userExist = await User.exists({ email, username });
+    const userExist = await User.exists({ email: email.toLowerCase() });
 
     console.log(userExist);
 
     if (userExist) {
       res.status(400);
-      throw new Error("Email or username already exists. Please sign in.");
+      throw new Error("Email already exists. Please sign in.");
     }
 
     // Hash password
@@ -52,7 +54,7 @@ const postSignUp = asyncHandler(async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: error.message });
+    res.status(409).json({ message: error.message });
   }
 });
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { styled } from "@mui/system";
 import { Box } from "@mui/material";
+import AlertNotification from "./AlertNotification";
 
 const BoxWrapper = styled("div")({
   width: "100%",

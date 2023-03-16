@@ -21,7 +21,7 @@ const signinSchema = Joi.object({
 // Routes
 router.post(
   "/signup",
-  validator.body(signupSchema),
+  // validator.body(signupSchema),
   authControllers.controllers.postSignUp
 );
 router.post(
