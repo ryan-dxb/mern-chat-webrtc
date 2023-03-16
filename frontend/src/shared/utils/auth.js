@@ -4,5 +4,5 @@ export const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
 
-  window.location.pathname = "/";
+  window.location.pathname = "/login";
 };

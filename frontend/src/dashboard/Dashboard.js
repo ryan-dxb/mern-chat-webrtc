@@ -1,23 +1,39 @@
 import React, { useEffect } from "react";
-import AuthBox from "../shared/components/AuthBox";
-import { testRoute } from "../api";
-import { logout } from "../shared/utils/auth";
+import { styled } from "@mui/system";
+import Sidebar from "./Sidebar/Sidebar";
+import FriendSidebar from "./FriendSidebar/FriendSidebar";
+import Messenger from "./Messenger/Messenger";
+import AppBar from "./AppBar/AppBar";
+import { useDispatch } from "react-redux";
+import { setUserDetails } from "../features/Auth/authSlice";
+
+const Wrapper = styled("div")({
+  width: "100%",
+  height: "100vh",
+  display: "flex",
+});
 
 const Dashboard = () => {
-  const test = async () => {
-    const response = await testRoute();
+  const dispatch = useDispatch();
 
-    console.log(response);
-  };
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!token) {
+      window.location.href = "/login";
+    } else {
+      dispatch(setUserDetails({ user: user, token: token }));
+    }
+  }, []);
 
   return (
-    <>
-      <AuthBox>
-        <h1>Dashboard</h1>
-        <button onClick={logout}>Test</button>
-      </AuthBox>
-      ;
-    </>
+    <Wrapper>
+      <Sidebar />
+      <FriendSidebar />
+      <Messenger />
+      <AppBar />
+    </Wrapper>
   );
 };
 
