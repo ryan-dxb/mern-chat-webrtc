@@ -1,22 +1,22 @@
+import { Tooltip } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import CustomPrimaryButton from "../../shared/components/CustomPrimaryButton";
 import RedirectInfo from "../../shared/components/RedirectInfo";
-import { useNavigate } from "react-router-dom";
-import { Tooltip } from "@mui/material";
 
-const LoginPageFooter = ({ handleLogin, isFormValid }) => {
+const RegisterPageFooter = ({ handleRegister, isFormValid }) => {
   const navigate = useNavigate();
 
-  const handlePushToSignUp = () => {
-    navigate("/register");
+  const handlePushToSignIn = () => {
+    navigate("/login");
   };
 
   const InvalidFormMessage = () => {
-    return <div>Please enter valid email and password</div>;
+    return <div>Please enter valid username, email and password</div>;
   };
 
   const ValidFormMessage = () => {
-    return <div>Click to login</div>;
+    return <div>Click to Register</div>;
   };
 
   return (
@@ -26,21 +26,21 @@ const LoginPageFooter = ({ handleLogin, isFormValid }) => {
       >
         <div>
           <CustomPrimaryButton
-            label="Log In"
+            label="Register"
             additionalStyles={{ marginTop: "30px" }}
             disabled={!isFormValid}
-            onClickHandler={handleLogin}
+            onClickHandler={handleRegister}
           />
         </div>
       </Tooltip>
       <RedirectInfo
-        text="Need an account?"
-        redirectText={"Sign Up"}
+        text="Already have an account?"
+        redirectText={"Sign In"}
         additionalStyles={{ marginTop: "10px" }}
-        redirectHandler={handlePushToSignUp}
+        redirectHandler={handlePushToSignIn}
       />
     </>
   );
 };
 
-export default LoginPageFooter;
+export default RegisterPageFooter;
